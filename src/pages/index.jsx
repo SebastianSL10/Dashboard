@@ -1,0 +1,9 @@
+export { default as Ecommerce } from './Ecommerce';
+export { default as Productos } from './Productos';
+export { default as Categorias } from './Categorias';
+export { default as Personas } from './Personas';
+export { default as Presentacion } from './Presentacion';
+export { default as Login } from '../Login';
+export { default as Lote } from './Lote';
+export { default as Ingreso } from './Ingreso';
+export { default as Salida } from './Salida';
