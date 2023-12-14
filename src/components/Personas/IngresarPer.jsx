@@ -29,7 +29,7 @@ function IngresarPer({ onDataUpdate }) {
             contra_usuario,
         };
 
-        fetch('http://52.154.73.74/api.php?apicall=createpersona', {
+        fetch('http://localhost/API/api.php?apicall=createpersona', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Header } from '../components';
 import { IngresarLote, ActualizarLote, EliminarLote } from '../components';
-import { FiEdit } from "react-icons/fi";
+import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { useStateContext } from '../contexts/ContextProvider';
 
 const Lote = () => {
   const [data, setData] = useState([]);
@@ -9,9 +10,10 @@ const Lote = () => {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
   const [editedRecord, setEditedRecord] = useState(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const { currentColor, currentMode } = useStateContext();
 
   const fetchData = () => {
-    fetch('http://localhost/API/api.php?apicall=readlote')
+    fetch('http://52.154.73.74/api.php?apicall=readlote')
       .then(response => response.json())
       .then(data => setData(data.contenido))
       .catch(error => console.log(error));
@@ -62,16 +64,16 @@ const Lote = () => {
         </div>
         <div className="w-full md:w-2/3 p-4">
           <div className="overflow-x-auto ml-4">
-            <table className="border-collapse w-full bg-emerald-100 border-2">
+            <table className="border-collapse w-full border-2">
               <thead>
-                <tr className="bg-gray-200">
-                  <th className="py-2 px-4 bg-teal-300 border-2">ID Lote</th>
-                  <th className="py-2 px-4 bg-teal-300 border-2">Fecha de Vencimiento</th>
-                  <th className="py-2 px-4 bg-teal-300 border-2">Cantidad de Lote</th>
-                  <th className="py-2 px-4 bg-teal-300 border-2">Acciones</th>
+                <tr className="bg-gray-300">
+                  <th className="py-2 px-4 bg-gray-500 border-2">ID Lote</th>
+                  <th className="py-2 px-4 bg-gray-500 border-2">Fecha de Vencimiento</th>
+                  <th className="py-2 px-4 bg-gray-500 border-2">Cantidad de Lote</th>
+                  <th className="py-2 px-4 bg-gray-500 border-2">Acciones</th>
                 </tr>
               </thead>
-              <tbody className="border-blue-500">
+              <tbody>
                 {Array.isArray(data) && data.length > 0 ? (
                   data.map((item, index) => (
                     <tr key={item.id_lote} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
@@ -80,6 +82,7 @@ const Lote = () => {
                       <td className="py-2 px-4 border">{item.cant_lote}</td>
                       <td className="py-2 px-4 border">
                         <button className="bg-yellow-500 text-white py-1 px-2 rounded mr-2" type="button" onClick={() => handleEditClick(editedRecord)}><FiEdit /></button>
+                        <button className="bg-red-600 text-white py-1 px-2 rounded" onClick={() => handleDeleteClick(editedRecord)}><FiTrash2 /></button>
                       </td>
                     </tr>
                   ))
@@ -91,11 +94,10 @@ const Lote = () => {
               </tbody>
             </table>
             <div className="mt-4 flex justify-around">
-              <button className="bg-teal-200 border-2 border-teal-500 text-black text-sm py-1 px-2 rounded hover:bg-teal-600" onClick={handleCreateClick}>
+              <button
+                className="border-2 border-gray-300 text-black text-sm py-1 px-2 rounded"
+                style={{ backgroundColor: currentColor }} onClick={handleCreateClick}>
                 Agregar nuevo lote
-              </button>
-              <button className="bg-red-200 border-2 border-red-500 text-black text-sm py-1 px-2 rounded hover:bg-red-600" onClick={() => handleDeleteClick(editedRecord)}>
-                Eliminar lote
               </button>
             </div>
           </div>

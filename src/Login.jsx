@@ -1,69 +1,50 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
-  const [nomUsuario, setNomUsuario] = useState('');
-  const [contraUsuario, setContraUsuario] = useState('');
-  const [error, setError] = useState('');
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      // Validar que los campos estén completos antes de enviar la solicitud de inicio de sesión
-      if (!nomUsuario || !contraUsuario) {
-        setError('Por favor, completa todos los campos.');
-        return;
-      }
+      // Realizar la llamada a la API para validar la información de inicio de sesión
+      const response = await axios.post(
+        'http://localhost/API/api.php?apicall=validateUserCredentials',
+        { nom_usuario: username, contra_usuario: password }
+      );
 
-      // Realiza la solicitud de inicio de sesión a la API
-      const response = await fetch('http://52.154.73.74/api.php?apicall=readpersona', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nom_usuario: nomUsuario, contra_usuario: contraUsuario }), // Cambiado aquí
-      });
-
-      if (response.ok) {
-        // El inicio de sesión fue exitoso, realiza redirección
+      // Verificar si la llamada fue exitosa y si el usuario existe
+      if (response.data && response.data.contenido) {
+        // Redirigir al dashboard
         navigate('/inicio');
       } else {
-        // El inicio de sesión falló, maneja el error
-        setError('Inicio de sesión fallido');
+        alert('Credenciales incorrectas');
       }
     } catch (error) {
-      setError('Error al iniciar sesión: ' + error.message);
+      console.error('Error al iniciar sesión:', error);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-500">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4">Iniciar Sesión</h2>
-        <input
-          type="text"
-          placeholder="Nombre de usuario"
-          value={nomUsuario}
-          onChange={(e) => setNomUsuario(e.target.value)}
-          className="w-full p-2 border rounded mb-4"
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={contraUsuario}
-          onChange={(e) => setContraUsuario(e.target.value)}
-          className="w-full p-2 border rounded mb-4"
-        />
-        {error && <p className="text-red-500">{error}</p>}
-        <button
-          onClick={handleLogin}
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-        >
-          Iniciar Sesión
+    <div>
+      <h2>Login</h2>
+      <form>
+        <div>
+          <label>Nombre de Usuario:</label>
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </div>
+        <div>
+          <label>Contraseña:</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <button type="button" onClick={handleLogin}>
+          Iniciar sesión
         </button>
-      </div>
+      </form>
     </div>
   );
-}
+};
 
 export default Login;

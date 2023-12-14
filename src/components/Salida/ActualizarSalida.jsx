@@ -4,8 +4,8 @@ function ActualizarSalida({ salida, onCancel, onDataUpdate }) {
     const [id_salida, setIdSalida] = useState('');
     const [fecha_salida, setFechaSalida] = useState('');
     const [responsable_salida, setResponsableSalida] = useState('');
-    const [cant_salida, setCantSalida] = useState('');
     const [num_id, setNumId] = useState('');
+    const [cant_salida, setCantSalida] = useState('');
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -15,8 +15,9 @@ function ActualizarSalida({ salida, onCancel, onDataUpdate }) {
             setIdSalida(salida.id_salida);
             setFechaSalida(salida.fecha_salida);
             setResponsableSalida(salida.responsable_salida);
-            setCantSalida(salida.cant_salida);
             setNumId(salida.num_id);
+            setCantSalida(salida.cant_salida);
+            
         }
     }, [salida]);
 
@@ -27,8 +28,9 @@ function ActualizarSalida({ salida, onCancel, onDataUpdate }) {
             id_salida,
             fecha_salida,
             responsable_salida,
-            cant_salida,
-            num_id
+            num_id,
+            cant_salida
+            
         };
 
         fetch('http://52.154.73.74/api.php?apicall=updatesalida', {
@@ -91,17 +93,6 @@ function ActualizarSalida({ salida, onCancel, onDataUpdate }) {
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700" htmlFor="cant_salida">Cantidad de productos a salir:</label>
-                    <input
-                        type="text"
-                        id="cant_salida"
-                        value={cant_salida}
-                        onChange={e => setCantSalida(e.target.value)}
-                        className="mt-1 p-2 block w-full border border-gray border-2 rounded-md text-black shadow-sm"
-                        required
-                    />
-                </div>
-                <div>
                     <label className="block text-sm font-medium text-gray-700" htmlFor="num_id">Número de ID:</label>
                     <input
                         type="text"
@@ -110,6 +101,17 @@ function ActualizarSalida({ salida, onCancel, onDataUpdate }) {
                         onChange={e => setNumId(e.target.value)}
                         className="mt-1 p-2 block w-full border border-gray border-2 rounded-md text-black shadow-sm"
                         readOnly // Para que el campo sea de solo lectura
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700" htmlFor="cant_salida">Cantidad de productos a salir:</label>
+                    <input
+                        type="text"
+                        id="cant_salida"
+                        value={cant_salida}
+                        onChange={e => setCantSalida(e.target.value)}
+                        className="mt-1 p-2 block w-full border border-gray border-2 rounded-md text-black shadow-sm"
+                        required
                     />
                 </div>
                 <button type="submit" className="mt-4 px-4 py-2 border border-transparent text-sm rounded-md text-white bg-teal-600 hover:bg-teal-700">

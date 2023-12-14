@@ -4,8 +4,8 @@ function IngresarSalida({ onCancel, onDataUpdate }) {
     const [id_salida, setIdSalida] = useState('');
     const [fecha_salida, setFechaSalida] = useState('');
     const [responsable_salida, setResponsableSalida] = useState('');
-    const [cant_salida, setCantSalida] = useState('');
     const [num_id, setNumId] = useState('');
+    const [cant_salida, setCantSalida] = useState('');
     const [message, setMessage] = useState('');
 
     const handleSubmit = (e) => {
@@ -15,8 +15,9 @@ function IngresarSalida({ onCancel, onDataUpdate }) {
             id_salida,
             fecha_salida,
             responsable_salida,
-            cant_salida,
-            num_id
+            num_id,
+            cant_salida
+
         };
 
         fetch('http://52.154.73.74/api.php?apicall=createsalida', {
@@ -84,17 +85,6 @@ function IngresarSalida({ onCancel, onDataUpdate }) {
                         required
                         className="mt-1 p-2 block w-full border border-gray border-2 rounded-md text-black shadow-sm"
                     />
-                    <label htmlFor="cant_salida" className="block text-sm font-medium text-gray-700">
-                        Cantidad de productos a salir:
-                    </label>
-                    <input
-                        type="text"
-                        id="cant_salida"
-                        value={cant_salida}
-                        onChange={e => setCantSalida(e.target.value)}
-                        required
-                        className="mt-1 p-2 block w-full border border-gray border-2 rounded-md text-black shadow-sm"
-                    />
                     <label htmlFor="num_id" className="block text-sm font-medium text-gray-700">
                         Número de ID:
                     </label>
@@ -103,6 +93,17 @@ function IngresarSalida({ onCancel, onDataUpdate }) {
                         id="num_id"
                         value={num_id}
                         onChange={e => setNumId(e.target.value)}
+                        required
+                        className="mt-1 p-2 block w-full border border-gray border-2 rounded-md text-black shadow-sm"
+                    />
+                    <label htmlFor="cant_salida" className="block text-sm font-medium text-gray-700">
+                        Cantidad de productos a sacar:
+                    </label>
+                    <input
+                        type="text"
+                        id="cant_salida"
+                        value={cant_salida}
+                        onChange={e => setCantSalida(e.target.value)}
                         required
                         className="mt-1 p-2 block w-full border border-gray border-2 rounded-md text-black shadow-sm"
                     />

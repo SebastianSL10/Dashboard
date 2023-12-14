@@ -6,9 +6,6 @@ export { default as Navbar } from './Navbar';
 export { default as Footer } from './Footer';
 export { default as UserProfile } from './UserProfile';
 export { default as SparkLine } from './Charts/SparkLine';
-export { default as LineChart } from './Charts/LineChart';
-export { default as Stacked } from './Charts/Stacked';
-export { default as Pie } from './Charts/Pie';
 export { default as ChartsHeader } from './ChartsHeader';
 export { default as Header } from './Header';
 export { default as Ingresar } from './Categorias/Ingresar';
@@ -32,5 +29,12 @@ export { default as EliminarIngr } from './Ingreso/EliminarIngr';
 export { default as IngresarSalida } from './Salida/IngresarSalida';
 export { default as ActualizarSalida } from './Salida/ActualizarSalida';
 export { default as EliminarSalida } from './Salida/EliminarSalida';
+export { default as TotalUsuarios } from './TotalUsuarios';
+export { default as IngresosTotal } from './IngresosTotal';
+export { default as TotalSalidas } from './TotalSalidas';
+export { default as SumProductos } from './SumProductos';
+export { default as SumIngresos } from './SumIngresos';
+export { default as SumSalidas } from './SumSalidas';
+export { default as TotalProductos } from './TotalProductos';
 
 
