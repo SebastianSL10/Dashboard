@@ -35,7 +35,7 @@ const LoginPage = () => {
 
       // Realizar la llamada a la API para validar las credenciales
       const response = await axios.post(
-        'http://localhost/API/api.php?apicall=validateUserCredentials',
+        'http://52.154.73.74/api.php?apicall=validateUserCredentials',
         { nom_usuario: username, contra_usuario: password }
       );
 
