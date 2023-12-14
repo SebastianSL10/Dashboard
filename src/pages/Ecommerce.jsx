@@ -134,6 +134,7 @@ const Ecommerce = () => {
           </div>
           <div className="md:w-full overflow-auto">
             <TotalUsuarios />
+            Ademas de otrxs
           </div>
         </div>
       </div>
